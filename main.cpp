@@ -42,5 +42,16 @@ public:
         return *this;
     }
 
+    vector4& sub(const vector4 &other) {
+        data = _mm_sub_ps(data, other.data);
+        return *this;
+    }
+
+    vector4& sub(float x, float y, float z) {
+        __m128 other = _mm_set_ps(0.0f, z, y, x);
+        data = _mm_sub_ps(data, other);
+        return *this;
+    }
+
 
 };
