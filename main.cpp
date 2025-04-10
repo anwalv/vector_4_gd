@@ -1,6 +1,6 @@
 #include <iostream>
 #include <immintrin.h>
-
+#include <cmath>
 
 struct vector4 {
 private:
@@ -30,4 +30,17 @@ public:
     float w() const {
         return _mm_cvtss_f32(_mm_shuffle_ps(data, data, _MM_SHUFFLE(3, 3, 3, 3)));
     }
+
+    vector4& add(const vector4 &other) {
+        data = _mm_add_ps(data, other.data);
+        return *this;
+    }
+
+    vector4& add(float x, float y, float z) {
+        __m128 other = _mm_set_ps(0.0f, z, y, x);
+        data = _mm_add_ps(data, other);
+        return *this;
+    }
+
+
 };
