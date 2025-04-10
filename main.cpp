@@ -53,5 +53,16 @@ public:
         return *this;
     }
 
+    vector4& mul(float scale) {
+        __m128 scalar = _mm_set1_ps(scale);
+        data = _mm_mul_ps(data, scalar);
+        return *this;
+    }
+
+    vector4& mul(float scale, float w_scale) {
+        __m128 scalar = _mm_set_ps(w_scale, scale, scale, scale);
+        data = _mm_mul_ps(data, scalar);
+        return *this;
+    }
 
 };
